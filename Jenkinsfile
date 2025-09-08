@@ -1,19 +1,19 @@
 pipeline {
     agent any
-    tools { nodejs "Nodejs" }
+    // tools { nodejs "Nodejs" }
     environment {
         BUILD_ID = "${env.BUILD_NUMBER}"
         INFRA_JOB = "infra-pipeline"
     }
     stages {
-        stage('Install & Build') {
-            steps {
-                sh """
-                npm install
-                npm run build
-                """
-            }
-        }
+        // stage('Install & Build') {
+        //     steps {
+        //         sh """
+        //         npm install
+        //         npm run build
+        //         """
+        //     }
+        // }
         stage('Trigger Infra Pipeline') {
             steps {
                 build job: "${INFRA_JOB}", parameters: [
