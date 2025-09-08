@@ -8,15 +8,6 @@ pipeline {
     }
     
     stages {
-        // Optional React build stage
-        // stage('Install & Build') {
-        //     steps {
-        //         sh """
-        //         npm install
-        //         npm run build
-        //         """
-        //     }
-        // }
 
         stage('Trigger Infra Pipeline') {
             steps {
