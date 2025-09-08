@@ -3,7 +3,7 @@ pipeline {
     // tools { nodejs "Nodejs" }
     environment {
         BUILD_ID = "${env.BUILD_NUMBER}"
-        INFRA_JOB = "infra-pipeline"
+        INFRA_JOB = "Terraform-build"
     }
     stages {
         // stage('Install & Build') {
