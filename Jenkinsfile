@@ -48,16 +48,17 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                echo 'Deploying to Nginx...'
-                sh '''
-                    sudo rm -rf /var/www/html/*
-                    sudo cp -r build/* /var/www/html/
-                    sudo systemctl restart nginx
-                '''
-            }
-        }
+stage('Deploy') {
+    steps {
+        echo 'Deploying to Nginx...'
+        sh '''
+            sudo rm -rf /var/www/html/*
+            sudo cp -r build/* /var/www/html/
+            sudo systemctl restart nginx
+        '''
+    }
+}
+
     }
 
     post {
