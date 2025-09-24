@@ -2,28 +2,48 @@ pipeline {
     agent any
 
     environment {
-        NODEJS_HOME = tool name: 'Nodejs', type: 'NodeJS' // Jenkins NodeJS tool
+        NODEJS_HOME = tool name: 'Nodejs', type: 'NodeJS'
         PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
+        BRANCH_NAME = "feature-branch"
     }
 
     stages {
         stage('Checkout') {
             steps {
-                echo 'Pulling latest code...'
+                echo 'Checking out branch...'
                 checkout scm
+            }
+        }
+
+        stage('Commit & Push Changes') {
+            steps {
+                echo "Committing local changes and pushing to ${BRANCH_NAME}..."
+                sh '''
+                    git config user.email "jenkins@local"
+                    git config user.name "Jenkins CI"
+
+                    # Add & commit only if there are changes
+                    if [ -n "$(git status --porcelain)" ]; then
+                        git add .
+                        git commit -m "Auto-commit: Jenkins pipeline changes"
+                        git push origin ${BRANCH_NAME}
+                    else
+                        echo "No changes to commit."
+                    fi
+                '''
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                echo 'Installing npm packages...'
+                echo 'Installing npm dependencies...'
                 sh 'npm install'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Building production React app...'
+                echo 'Building React app...'
                 sh 'npm run build'
             }
         }
@@ -42,10 +62,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Deployment successful! Visit http://localhost/ to see your app.'
+            echo "✅ Build & Deploy successful. App updated at http://localhost/"
         }
         failure {
-            echo '❌ Build or deployment failed.'
+            echo "❌ Pipeline failed."
         }
     }
 }
