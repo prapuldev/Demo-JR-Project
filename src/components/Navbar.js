@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../logo.svg';
-import styled from 'styled-components';
-import { ButtonContainer } from './Button';
-import { ThemeContext } from './context/ThemeContexts';
-import { FaRegMoon } from 'react-icons/fa';
-import { GoSun } from 'react-icons/go';
-import { AiOutlineMenu } from 'react-icons/ai'
-import { ProductConsumer } from '../context';
-import { NavLink } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import logo from "../logo.svg";
+import styled from "styled-components";
+import { ButtonContainer } from "./Button";
+import { ThemeContext } from "./context/ThemeContexts";
+import { FaRegMoon } from "react-icons/fa";
+import { GoSun } from "react-icons/go";
+import { AiOutlineMenu } from "react-icons/ai";
+import { ProductConsumer } from "../context";
+import { NavLink } from "react-router-dom";
 
 class Navbar extends Component {
   static contextType = ThemeContext;
@@ -25,11 +25,11 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
+    window.addEventListener("resize", this.handleResize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener("resize", this.handleResize);
   }
 
   handleResize() {
@@ -59,22 +59,43 @@ class Navbar extends Component {
             </div>
             {menuOpen && (
               <div className=" resmenu w-100 ">
-                <NavLink to="/" className={({ isActive }) => isActive ? "text-primary" : "text-white hover"}>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "text-primary" : "text-white hover"
+                  }
+                >
                   Products
                 </NavLink>
                 <ProductConsumer>
-                  {value => (<li style={{
-                    listStyleType: 'none'
-                  }}>
-                    <input placeholder='Search for products' onChange={(e) => {
-                      value.filterProducts(e.target.value);
-                    }}>
-                    </input>
-                  </li>)
-                  }
+                  {(value) => (
+                    <li
+                      style={{
+                        listStyleType: "none",
+                      }}
+                    >
+                      <input
+                        placeholder="Search for products"
+                        onChange={(e) => {
+                          value.filterProducts(e.target.value);
+                        }}
+                      ></input>
+                    </li>
+                  )}
                 </ProductConsumer>
-                <Link className="text-white bg-transparent themes" onClick={toggleTheme}>
-                  {theme ? <h6>Dark Mode <FaRegMoon /></h6> : <h6>Light Mode <GoSun /></h6>}
+                <Link
+                  className="text-white bg-transparent themes"
+                  onClick={toggleTheme}
+                >
+                  {theme ? (
+                    <h6>
+                      Dark Mode <FaRegMoon />
+                    </h6>
+                  ) : (
+                    <h6>
+                      Light Mode <GoSun />
+                    </h6>
+                  )}
                 </Link>
                 <Link to="/cart" className="ml-auto">
                   <ButtonContainer>
@@ -99,21 +120,27 @@ class Navbar extends Component {
             </ul>
             <ul className="navbar-nav align-items-center">
               <ProductConsumer>
-                {value => (<li className="nav-item ml-5">
-                  <input placeholder='Search for products' onChange={(e) => {
-                    value.filterProducts(e.target.value);
-                  }}>
-                  </input>
-                </li>)
-                }
+                {(value) => (
+                  <li className="nav-item ml-5">
+                    <input
+                      placeholder="Search for products"
+                      onChange={(e) => {
+                        value.filterProducts(e.target.value);
+                      }}
+                    ></input>
+                  </li>
+                )}
               </ProductConsumer>
             </ul>
             <Link to="/cart" className="ml-auto">
               <ButtonContainer>
-                <i className="fas fa-cart-plus">my cart</i>
+                <i className="fas fa-cart-plus">mydadasfs cart</i>
               </ButtonContainer>
             </Link>
-            <div className="text-white bg-transparent themes mainmenu" onClick={toggleTheme}>
+            <div
+              className="text-white bg-transparent themes mainmenu"
+              onClick={toggleTheme}
+            >
               {theme ? <FaRegMoon /> : <GoSun />}
             </div>
           </DesktopNavWrapper>
