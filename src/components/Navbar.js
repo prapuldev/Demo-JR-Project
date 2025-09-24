@@ -99,7 +99,7 @@ class Navbar extends Component {
                 </Link>
                 <Link to="/cart" className="ml-auto">
                   <ButtonContainer>
-                    <i className="fas fa-cart-plus">my dasdadasd cart</i>
+                    <i className="fas fa-cart-plus">my cart</i>
                   </ButtonContainer>
                 </Link>
               </div>
