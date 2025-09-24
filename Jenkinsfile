@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        NODEJS_HOME = tool name: 'Nodejs', type: 'NodeJS'
-        PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
+       // NODEJS_HOME = tool name: 'Nodejs', type: 'NodeJS'
+        //PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
         BRANCH_NAME = "feature-branch"
     }
 
